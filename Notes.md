@@ -11,3 +11,6 @@ Lec-1, 2, 3
 5. In some libraries like `vite` there is a strict rule, file name ends with `.jsx` and file name can start with small letter.
 6. In react, javascript is added in HTML file through react-scripts but it is not shown in the HTML file. It can be seen through Inspect window.
 7. In vite , javascript is loaded in HTML file through the script tag.
+
+Lec 4:
+1. {username} : this is called evaluated expression in js. it is used to inject variable in html. In curly braces we can not insert if else statement as object takes variable and not if else statement like in `reactElement` created in `main.jsx` file.
