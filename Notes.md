@@ -14,3 +14,11 @@ Lec-1, 2, 3
 
 Lec 4:
 1. {username} : this is called evaluated expression in js. it is used to inject variable in html. In curly braces we can not insert if else statement as object takes variable and not if else statement like in `reactElement` created in `main.jsx` file.
+
+Lec 5:
+1. React controls the ui updation of the page using hooks.
+2. useState: responsible to change the state i.e propagate the change to UI(DOM).
+
+    - syntax: useState(defaultValue)
+    - returns 2 things(counter and setCounter(a function)) in an Array format. And the setCounter function is responsible for update of counter variable.
+3. 
