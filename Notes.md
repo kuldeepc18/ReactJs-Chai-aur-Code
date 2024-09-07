@@ -1,10 +1,11 @@
-Lec-1, 2, 3
+Lec 1, 2, 3
 
 1. For Web Apps
-    React --> ReactDOM
+   React --> ReactDOM
 
    For Mobile Apps
-    React --> ReactNative
+   React --> ReactNative
+
 2. The `index.html` is the main page that loads, which is why they are single-page applications (SPA).
 3. React creates its own DOM called the Virtual DOM. It then compares it with the main DOM and makes the necessary changes.
 4. function name must be capitalize (in react). function is nothing but the component and file name can ends with `js` or `jsx`
@@ -12,13 +13,54 @@ Lec-1, 2, 3
 6. In react, javascript is added in HTML file through react-scripts but it is not shown in the HTML file. It can be seen through Inspect window.
 7. In vite , javascript is loaded in HTML file through the script tag.
 
-Lec 4:
+Lec 4
+
 1. {username} : this is called evaluated expression in js. it is used to inject variable in html. In curly braces we can not insert if else statement as object takes variable and not if else statement like in `reactElement` created in `main.jsx` file.
 
-Lec 5:
-1. React controls the ui updation of the page using hooks.
-2. useState: responsible to change the state i.e propagate the change to UI(DOM).
+Lec 5
 
-    - syntax: useState(defaultValue)
-    - returns 2 things(counter and setCounter(a function)) in an Array format. And the setCounter function is responsible for update of counter variable.
-3. 
+1. React controls the ui updation of the page using hooks.
+2. **useState:** responsible to change the state i.e propagate the change to UI(DOM).
+
+   - syntax: useState(defaultValue)
+   - returns 2 things(counter and setCounter(a function)) in an Array format. And the setCounter function is responsible for update of counter variable.
+
+Lec 6
+
+- **Virtual DOM**: The Virtual DOM is a lightweight in-memory representation of the actual DOM in React. When a component’s state or props change, React creates a new Virtual DOM, compares it with the previous one (a process called "diffing"), and updates only the parts of the real DOM that need to change, improving performance.
+
+- **React Fiber**: React Fiber is a complete rewrite of React’s core algorithm introduced in React 16 to make updates more efficient. It breaks the rendering process into smaller units of work, allowing React to pause, resume, or prioritize tasks, making the UI more responsive, especially for complex applications.
+
+- **Reconciliation**: Reconciliation is the process by which React updates the DOM. After the diffing process compares the new Virtual DOM with the previous one, reconciliation determines the minimum number of changes required to update the real DOM. This ensures optimized and efficient updates.
+
+- **Props**: In React, **props** are used to pass data from one component (usually a parent) to another (usually a child). They help make components dynamic and reusable by allowing the parent component to send data or functions to child components.
+
+- Here’s a simple example: 
+```jsx
+import React from "react";
+
+// Child component
+function Greeting(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+
+// Parent component
+function App() {
+  return (
+    <div>
+      <Greeting name="Alice" />
+      <Greeting name="Bob" />
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Explanation:
+
+- The `App` component (parent) passes a `name` prop to the `Greeting` component (child).
+- Inside `Greeting`, `props.name` is used to display the name passed from `App`.
+- The `Greeting` component is reusable, as shown by rendering it twice with different `name` values.
+
+In this example, `props` allow the `Greeting` component to dynamically display different names without changing its internal logic.
