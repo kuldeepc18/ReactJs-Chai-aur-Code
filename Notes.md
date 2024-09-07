@@ -95,3 +95,16 @@ setCounter(counter + 1);
 
 ### Lec 9
 
+- The app uses React's `useState` hook to manage the `color` state.
+- The `color` state controls the background color of the entire screen.
+- Initially, the background color is set to `"olive"`.
+- Several buttons are provided, each corresponding to a different color.
+- When a button is clicked, the `onClick` handler updates the `color` state with the selected color.
+- **Callback functions in `onClick`**:
+  - Ensure the function runs **only when** the button is clicked, not when the component renders.
+  - Allow passing arguments, such as the color value, to the function.
+  - Prevent unintended behavior like triggering the function on every render.
+- The outer `div` dynamically sets its `backgroundColor` based on the `color` state.
+- Tailwind CSS is used for styling, including full-screen layout, button design, and smooth transitions.
+- Buttons are fixed at the bottom of the screen, centered, and neatly spaced with rounded corners.
+- Each button changes its own background color to match the color it will set.
