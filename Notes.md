@@ -1,4 +1,4 @@
-Lec 1, 2, 3
+### Lec 1, 2, 3
 
 1. For Web Apps
    React --> ReactDOM
@@ -7,25 +7,31 @@ Lec 1, 2, 3
    React --> ReactNative
 
 2. The `index.html` is the main page that loads, which is why they are single-page applications (SPA).
+
 3. React creates its own DOM called the Virtual DOM. It then compares it with the main DOM and makes the necessary changes.
+
 4. function name must be capitalize (in react). function is nothing but the component and file name can ends with `js` or `jsx`
+
 5. In some libraries like `vite` there is a strict rule, file name ends with `.jsx` and file name can start with small letter.
+
 6. In react, javascript is added in HTML file through react-scripts but it is not shown in the HTML file. It can be seen through Inspect window.
+
 7. In vite , javascript is loaded in HTML file through the script tag.
 
-Lec 4
+### Lec 4
 
 1. {username} : this is called evaluated expression in js. it is used to inject variable in html. In curly braces we can not insert if else statement as object takes variable and not if else statement like in `reactElement` created in `main.jsx` file.
 
-Lec 5
+### Lec 5
 
 1. React controls the ui updation of the page using hooks.
+
 2. **useState:** responsible to change the state i.e propagate the change to UI(DOM).
 
-   - syntax: useState(defaultValue)
+   - syntax: const [state, setState] = useState(initialState)
    - returns 2 things(counter and setCounter(a function)) in an Array format. And the setCounter function is responsible for update of counter variable.
 
-Lec 6
+### Lec 6
 
 - **Virtual DOM**: The Virtual DOM is a lightweight in-memory representation of the actual DOM in React. When a component’s state or props change, React creates a new Virtual DOM, compares it with the previous one (a process called "diffing"), and updates only the parts of the real DOM that need to change, improving performance.
 
@@ -33,9 +39,11 @@ Lec 6
 
 - **Reconciliation**: Reconciliation is the process by which React updates the DOM. After the diffing process compares the new Virtual DOM with the previous one, reconciliation determines the minimum number of changes required to update the real DOM. This ensures optimized and efficient updates.
 
+### Lec 7
+
 - **Props**: In React, **props** are used to pass data from one component (usually a parent) to another (usually a child). They help make components dynamic and reusable by allowing the parent component to send data or functions to child components.
 
-- Here’s a simple example: 
+Here’s a simple example: 
 ```jsx
 import React from "react";
 
@@ -63,4 +71,27 @@ export default App;
 - Inside `Greeting`, `props.name` is used to display the name passed from `App`.
 - The `Greeting` component is reusable, as shown by rendering it twice with different `name` values.
 
-In this example, `props` allow the `Greeting` component to dynamically display different names without changing its internal logic.
+-  In this example, `props` allow the `Greeting` component to dynamically display different names without changing its internal logic.
+
+### Lec 8
+
+### A react interview question on counter.
+
+- In React, `setCounter` is an asynchronous function, meaning that if you update the state multiple times in a row without using the previous state, React might batch the updates. This can lead to incorrect results when relying on the current state.
+
+For example, if you directly use `setCounter(counter + 1)` multiple times like this:
+
+```js
+setCounter(counter + 1);
+setCounter(counter + 1);
+setCounter(counter + 1);
+```
+
+- React may not immediately apply the updates between calls. It might batch the updates, leading to only one increment instead of three because `counter` remains the same within the function calls.
+
+- However, when you use a function to update the state, like `setCounter(prevCounter => prevCounter + 1)`, you're ensuring that the update is based on the most recent value of `prevCounter`. This guarantees that each update correctly references the latest state, regardless of batching, leading to the expected result. This approach is essential when you're relying on the current state value in multiple state updates in the same render cycle. 
+
+- In your code, using `prevCounter` ensures that each `setCounter` correctly increments based on the most up-to-date value.
+
+### Lec 9
+
