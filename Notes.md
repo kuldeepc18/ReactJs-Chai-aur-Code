@@ -108,3 +108,7 @@ setCounter(counter + 1);
 - Tailwind CSS is used for styling, including full-screen layout, button design, and smooth transitions.
 - Buttons are fixed at the bottom of the screen, centered, and neatly spaced with rounded corners.
 - Each button changes its own background color to match the color it will set.
+
+### Lec 10
+
+- 
