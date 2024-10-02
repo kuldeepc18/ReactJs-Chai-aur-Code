@@ -111,4 +111,119 @@ setCounter(counter + 1);
 
 ### Lec 10
 
-- 
+### 1. **`useCallback` Hook**:
+- **What it does**: 
+  - `useCallback` returns a memoized version of the callback function that only changes if one of the dependencies has changed.
+  - This is particularly useful for optimizing performance in components that pass callback functions to child components, especially when those child components are wrapped in `React.memo`.
+  
+- **Why it's useful**:
+  - In React, functions are redefined on every render. If a child component depends on a callback function, it may unnecessarily re-render unless you use `useCallback` to prevent the function from changing unless necessary.
+  
+- **Real-World Example**:
+  - Suppose you have a parent component that renders a list of items, and each item has a delete button. Without `useCallback`, the delete function would be re-created on every render, which might cause unnecessary re-renders of the child component if it's memoized.
+  ```jsx
+  const Parent = () => {
+    const [count, setCount] = useState(0);
+
+    const handleDelete = useCallback((id) => {
+      console.log("Delete", id);
+    }, []);
+
+    return (
+      <div>
+        <Child onDelete={handleDelete} />
+        <button onClick={() => setCount(count + 1)}>Increment</button>
+      </div>
+    );
+  };
+  ```
+
+### 2. **`useEffect` Hook**:
+- **What it does**: 
+  - `useEffect` allows you to perform side effects in functional components. Side effects can include data fetching, subscriptions, manual DOM manipulations, and timers.
+  - By default, `useEffect` runs after every render, but you can control when it runs by specifying dependencies.
+  
+- **How it works**:
+  - The effect runs after the component renders and can also return a cleanup function that runs when the component is unmounted or before the effect is re-run.
+  - If you provide an empty dependency array (`[]`), the effect will run only once, mimicking `componentDidMount`.
+  
+- **Common uses**:
+  - **Data fetching**: Make API calls after the component renders.
+  - **Event listeners**: Add and clean up event listeners.
+  - **DOM manipulation**: Directly manipulate the DOM (though you should try to avoid this when possible in React).
+  
+- **Example**:
+  ```jsx
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch("/api/data");
+      console.log(data);
+    };
+    
+    fetchData();
+    
+    // Cleanup: runs when the component unmounts
+    return () => {
+      console.log("Cleaning up...");
+    };
+  }, []);  // Empty dependency array, so it only runs once.
+  ```
+
+- **Dependency Array**:
+  - You can pass a list of dependencies to `useEffect`. It will re-run only when one of the dependencies changes.
+  - If no dependency array is provided, the effect runs after every render.
+
+  ```jsx
+  useEffect(() => {
+    console.log("Count changed:", count);
+  }, [count]);  // Runs only when `count` changes.
+  ```
+
+### 3. **`useRef` Hook**:
+- **What it does**:
+  - `useRef` returns a mutable object with a `.current` property that persists across renders. It doesn’t trigger a re-render when updated.
+  - Typically used for accessing or manipulating DOM elements directly, and for storing any mutable values that persist between renders without triggering re-renders.
+  
+- **When to use**:
+  - **Accessing DOM elements**: You can use `useRef` to interact with DOM nodes directly, like focusing an input field or scrolling an element into view.
+  - **Storing values**: You can store any mutable value (like timers, previous values, or event handlers) without causing the component to re-render.
+
+- **Example (DOM manipulation)**:
+  ```jsx
+  const InputComponent = () => {
+    const inputRef = useRef(null);
+
+    const handleFocus = () => {
+      inputRef.current.focus();
+    };
+
+    return (
+      <div>
+        <input ref={inputRef} type="text" />
+        <button onClick={handleFocus}>Focus Input</button>
+      </div>
+    );
+  };
+  ```
+
+- **Example (storing values)**:
+  - You can use `useRef` to store the previous value of a state variable without triggering a re-render.
+  ```jsx
+  const Component = () => {
+    const [count, setCount] = useState(0);
+    const prevCountRef = useRef();
+
+    useEffect(() => {
+      prevCountRef.current = count;
+    }, [count]);
+
+    const prevCount = prevCountRef.current;
+
+    return <h1>Now: {count}, Before: {prevCount}</h1>;
+  };
+  ```
+
+In summary, each hook serves a unique purpose:
+- **`useCallback`**: Memoizes functions to prevent unnecessary re-renders.
+- **`useEffect`**: Manages side effects (like data fetching and subscriptions).
+- **`useRef`**: Allows you to persist values across renders without causing re-renders, and it’s commonly used for accessing DOM elements.
