@@ -227,3 +227,8 @@ In summary, each hook serves a unique purpose:
 - **`useCallback`**: Memoizes functions to prevent unnecessary re-renders.
 - **`useEffect`**: Manages side effects (like data fetching and subscriptions).
 - **`useRef`**: Allows you to persist values across renders without causing re-renders, and it’s commonly used for accessing DOM elements.
+
+### Lec 11
+
+- majority of the time hooks returns javascript only, so to create custom Hooks we create `.js` files and if it returns jsx then create `.jsx` file.
+- Remember to use `keys` in loops in React. 
