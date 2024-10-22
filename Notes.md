@@ -10,6 +10,7 @@
 - [UseEffect, useRef, UseCallback in 1 project](#lec-10)
 - [Custom hooks in react | currency project](#lec-11)
 - [What is React router](#lec-12)
+- [Context API](#lec-13)
 
 ### Lec 1, 2, 3
 
@@ -516,3 +517,72 @@ function App() {
   );
 }
 ```
+
+### Lec 13
+
+The **Context API** in React is a feature that allows you to share state and data across components without having to pass props down manually at every level. It helps manage and access "global" data that many components in the app might need, such as the current user, theme, or language preferences.
+
+### Key Components of the Context API:
+
+1. **`React.createContext()`**:  
+   - This function creates a new context. It returns an object with two components:
+     - **`Provider`**: This component wraps around the part of the app where the data should be available. It allows its child components to subscribe to the context.
+     - **`Consumer`**: This component is used to access the context value within components that need it.
+
+2. **`Provider`**:  
+   - The Provider component accepts a `value` prop, which represents the data you want to make available to the consuming components. Any child component can access this value if it’s wrapped by the Provider.
+
+3. **`useContext()` Hook**:  
+   - The `useContext()` hook allows functional components to access context values directly. It simplifies consuming context compared to using the Consumer component.
+
+### When to Use Context API
+- It’s ideal for situations where you have data that is needed by many components, and prop drilling (passing props through multiple components) becomes cumbersome.
+
+### Example:
+
+```jsx
+import React, { createContext, useState, useContext } from 'react';
+
+// Create a Context
+const ThemeContext = createContext();
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    // Provide the theme state to the entire component tree
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar() {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+function ThemedButton() {
+  // Consume the theme value from context
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    <button
+      style={{ background: theme === 'light' ? '#fff' : '#333', color: theme === 'light' ? '#000' : '#fff' }}
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+    >
+      Toggle Theme
+    </button>
+  );
+}
+
+export default App;
+```
+
+In this example:
+- The `ThemeContext.Provider` provides the `theme` state to all components inside of it.
+- The `useContext()` hook is used in the `ThemedButton` component to consume the current theme and change it.
+
