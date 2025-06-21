@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
-import { useTodo } from '../context/TodoContext'
-
+import { useTodo } from '../contexts/TodoContext';
 
 function TodoForm() {
     const [todo, setTodo] = useState("")
-    const {addTodo} = useTodo()
+    const { addTodo } = useTodo()
 
     const add = (e) => {
         e.preventDefault()
 
-        if(!todo) return 
-        
-        addTodo({todo, completed: false})
+        if (!todo) return
+
+        addTodo({ todo, completed: false })
         setTodo("")
     }
 
@@ -32,4 +31,3 @@ function TodoForm() {
 }
 
 export default TodoForm;
-
