@@ -1,1 +1,0 @@
-.env --> used to store environment variables (in key-value pairs) like secret keys, Id's, API Keys, config settings, etc.
